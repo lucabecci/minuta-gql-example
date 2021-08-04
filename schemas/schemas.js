@@ -1,7 +1,8 @@
-import { GraphQLID, GraphQLList, GraphQLObjectType, GraphQLSchema, GraphQLString } from "graphql";
+import { GraphQLID, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLSchema, GraphQLString } from "graphql";
 import Database from '../db'
 import {UserType} from '../types/types'
-const Schemas = new GraphQLObjectType({
+
+const Querys = new GraphQLObjectType({
     name: "RootQueryType",
     fields: {
         status: {
@@ -29,9 +30,31 @@ const Schemas = new GraphQLObjectType({
             }
         }
     },
-    
+})
+
+const Mutations = new GraphQLObjectType({
+    name: "Mutations",
+    field: {
+        updateName: {
+            type: UserType,
+            args: {
+                id:{ type: new GraphQLNonNull(GraphQLID) },
+                name:{ type: new GraphQLNonNull(GraphQLString) }
+            },
+            resolve(parent, args){
+                for (const user of Database) {
+                    if(user.id === Number(args.id)){
+                        user.name = args.name
+                        return user
+                    }
+                    return null
+                }
+            }
+        }
+    }
 })
 
 export default new GraphQLSchema({
-    query: Schemas
+    query: Querys,
+    mutation: Mutations
 })
