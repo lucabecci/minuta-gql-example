@@ -1,0 +1,7 @@
+{
+   "CONF": {
+    "PORT": 4040,
+    "NAMESPACE": "SERVER-GQL",
+    "NODE_ENV": "development"
+   }
+}
