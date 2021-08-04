@@ -1,0 +1,16 @@
+{
+  "name": "gql-minuta",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.14.8",
+    "@babel/node": "^7.14.9",
+    "@babel/preset-env": "^7.14.9",
+    "@babel/register": "^7.14.5"
+  },
+  "scripts": {
+    "start:realtime": "nodemon --exec node_modules/.bin/babel-node"
+  }
+}
